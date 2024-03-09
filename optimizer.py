@@ -805,14 +805,14 @@ class Optimizer:
 
 
 
-if __name__ == '__main__':
-    from steric_free_simulator import ReactionNetwork
-    base_input = './input_files/dimer.bngl'
-    rn = ReactionNetwork(base_input, one_step=True)
-    rn.reset()
-    rn.intialize_activations()
-    optim = Optimizer(reaction_network=rn,
-                      sim_runtime=.001,
-                      optim_iterations=10,
-                      learning_rate=10,)
-    vec_rn = optim.optimize()
+# if __name__ == '__main__':
+#     from steric_free_simulator import ReactionNetwork
+#     base_input = './input_files/dimer.bngl'
+#     rn = ReactionNetwork(base_input, one_step=True)
+#     rn.reset()
+#     rn.intialize_activations()
+#     optim = Optimizer(reaction_network=rn,
+#                       sim_runtime=.001,
+#                       optim_iterations=10,
+#                       learning_rate=10,)
+#     vec_rn = optim.optimize()
