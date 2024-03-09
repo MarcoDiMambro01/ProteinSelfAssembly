@@ -248,7 +248,7 @@ class VecSim:
             # if torch.min(self.rn.copies_vec[torch.nonzero(self.rn.copies_vec)]) < conc_scale:
             #     conc_scale = torch.min(self.rn.copies_vec[torch.nonzero(self.rn.copies_vec)]).item()
 
-            delta_copies = torch.matmul(self.rn.M, rate_step)*conc_scale
+            delta_copies = torch.matmul(self.rn.M, rate_step)#*conc_scale
 
             #Calculate reaction flux, if specified
             if self.calc_flux:
