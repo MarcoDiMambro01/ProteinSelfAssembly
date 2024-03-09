@@ -22,7 +22,7 @@ def main():
 
     parser.add_argument("--dG", default=20)             #free energy of the reactions
 
-    parser.add_argument("--runtime", default=100)       #runtime of the simulation
+    parser.add_argument("--runtime", default=1)         #runtime of the simulation
     parser.add_argument("--c_scale", default=1)         #parameter for the simulation
     parser.add_argument("--c_thresh", default=1e-1)     #parameter of the simulation
     parser.add_argument("--optim", default='time')      #parameter of the simulation (time or yield)
