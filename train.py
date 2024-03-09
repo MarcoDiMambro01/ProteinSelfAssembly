@@ -23,11 +23,18 @@ from torch import DoubleTensor as Tensor
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def init(, **args):
+
+    if args.get("size")==3:
+        Size="trimer"
+    elif args.get("size")==4:
+        Size="tetramer"
+    else:
+        pass
     
     if args.get("protocol")==None:
-        base_input = f'input_files/{args.get("topology")}_{args.get("N")}_dG_{args.get("dG")}.pwr'
+        base_input = f'input_files/{args.get("topology")}_{Size}_dG_{args.get("dG")}.pwr'
     elif args.get("protocol")=='A'
-        base_input = f'input_files/{args.get("topology")}_{args.get("N")}_dG_{args.get("dG")}_rategrowth.pwr'
+        base_input = f'input_files/{args.get("topology")}_{Size}_dG_{args.get("dG")}_rategrowth.pwr'
     else 
         pass
         #aggiungere gli altri protocolli
