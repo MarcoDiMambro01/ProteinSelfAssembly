@@ -327,7 +327,7 @@ class Optimizer:
             self.parameter_history.append(self.rn.kon.clone().detach().to(torch.device(device)).numpy())
 
 
-
+            print("check 5")
             if optim in ['yield', 'time']:
                 if optim == 'yield':
                     print(f'Yield on sim. iteration {i} was {str(total_yield.item() * 100)[:4]}%.')
