@@ -9,7 +9,6 @@ import psutil
 
 from .vec_sim import VecSim
 from .vectorized_rxn_net  import VectorizedRxnNet
-import vectorized_rxn_net
 
 from torch.optim.lr_scheduler import StepLR
 from torch.optim.lr_scheduler import ReduceLROnPlateau

@@ -7,8 +7,7 @@ from typing import Tuple
 #from KineticAssembly_AD import ReactionNetwork
 #from KineticAssembly_AD import reaction_network as RN
 
-from .reaction_network import ReactionNetwork
-import reaction_network as RN
+from .reaction_network import ReactionNetwork, gtostr
 
 import networkx as nx
 
@@ -929,7 +928,7 @@ class VectorizedRxnNet:
     def get_node_flux(self,n):
         node_map = {}
         for node in self.reaction_network.network.nodes():
-            node_map[RN.gtostr(self.reaction_network.network.nodes[node]['struct'])] = node
+            node_map[gtostr(self.reaction_network.network.nodes[node]['struct'])] = node
         total_flux_outedges = 0
         total_flux_inedges = 0
         #Go over all the out edges
@@ -953,9 +952,9 @@ class VectorizedRxnNet:
 
                 #Getting conc. of reactants and products
                 #Get product
-                prod = RN.gtostr(self.reaction_network.network.nodes[edge[1]]['struct'])
+                prod = gtostr(self.reaction_network.network.nodes[edge[1]]['struct'])
                 #Get other reactant
-                react = "".join(sorted(list(set(prod) - set(RN.gtostr(self.reaction_network.network.nodes[edge[0]]['struct']) ))))
+                react = "".join(sorted(list(set(prod) - set(gtostr(self.reaction_network.network.nodes[edge[0]]['struct']) ))))
 
                 #Net flux from this edge = Generation - consumption
                 edge_flux = koff*self.copies_vec[edge[1]] - temp_kon*(self.copies_vec[edge[0]])*(self.copies_vec[node_map[react]])
@@ -991,9 +990,9 @@ class VectorizedRxnNet:
                 koff = torch.exp(l_koff)
 
                 #Get conc. of reactants and products
-                prod = RN.gtostr(self.reaction_network.network.nodes[edge[1]]['struct'])
+                prod = gtostr(self.reaction_network.network.nodes[edge[1]]['struct'])
                 #Get other reactant
-                react = "".join(sorted(list(set(prod) - set(RN.gtostr(self.reaction_network.network.nodes[edge[0]]['struct']) ))))
+                react = "".join(sorted(list(set(prod) - set(gtostr(self.reaction_network.network.nodes[edge[0]]['struct']) ))))
                 react_list.append(node_map[react])
                 #Net flux from this edge = Generation - consumption
                 edge_flux_in = temp_kon*(self.copies_vec[edge[0]])*(self.copies_vec[node_map[react]])- koff*self.copies_vec[edge[1]]
@@ -1027,8 +1026,8 @@ class VectorizedRxnNet:
                 react_dict[r_tup]=reaction_id
             for k,v in self.reaction_network.network[n].items():
                 uid = v['uid']
-                r1 = set(RN.gtostr(self.reaction_network.network.nodes[n]['struct']))
-                p = set(RN.gtostr(self.reaction_network.network.nodes[k]['struct']))
+                r1 = set(gtostr(self.reaction_network.network.nodes[n]['struct']))
+                p = set(gtostr(self.reaction_network.network.nodes[k]['struct']))
                 r2 = p-r1
                 reactants = ("".join(r1),"".join(r2))
                 uid_dict[(n,k)] = uid
@@ -1058,9 +1057,9 @@ class VectorizedRxnNet:
     def calculate_total_flux(self):
         net_flux = {}
         for n in self.reaction_network.network.nodes():
-            n_str = RN.gtostr(self.reaction_network.network.nodes[n]['struct'])
+            n_str = gtostr(self.reaction_network.network.nodes[n]['struct'])
             node_flux = self.get_node_flux(n)
-            net_flux[RN.gtostr(self.reaction_network.network.nodes[n]['struct'])] = node_flux
+            net_flux[gtostr(self.reaction_network.network.nodes[n]['struct'])] = node_flux
 
         return(net_flux)
 
