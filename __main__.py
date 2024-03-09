@@ -30,6 +30,8 @@ def main():
     parser.add_argument("--lr", default=1e-1)           #learning rate
     parser.add_argument("--iter", default=100)          #optim iterations
 
+    parser.add_argument("--output", type=str, required=True)
+
 
     args = parser.parse_args().__dict__
 
