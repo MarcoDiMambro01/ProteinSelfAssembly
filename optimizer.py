@@ -31,7 +31,7 @@ class Optimizer:
         # Load device for PyTorch (e.g. GPU or CPU)
         if torch.cuda.is_available():# and "cpu" not in device:
             self.dev = torch.device(device)
-            print("Using " + device)
+            #print("Using " + device)
         else:
             self.dev = torch.device("cpu")
             device = 'cpu'
