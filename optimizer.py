@@ -264,6 +264,7 @@ class Optimizer:
                 # print(sim.calc_flux)
             else:
                 print("check 1")
+                print(f"kon: {self.rn.kon}")
                 sim = self.sim_class(self.rn,
                                      self.sim_runtime,
                                      device=self.dev,
