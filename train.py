@@ -21,7 +21,7 @@ from torch import DoubleTensor as Tensor
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-def init(size, **args):
+def init(size,protocol, **args):
 
     if size==3:
         final_size="trimer"
@@ -31,9 +31,9 @@ def init(size, **args):
         pass
     print(f"Size: {final_size}")
     
-    if args.get("protocol")==None:
+    if protocol==None:
         base_input = f'ProteinSelfAssembly/{args.get("topology")}_{final_size}_dG_{args.get("dG")}.pwr'
-    elif args.get("protocol")=='A':
+    elif protocol=='A':
         base_input = f'{args.get("topology")}_{final_size}_dG_{args.get("dG")}_rategrowth.pwr'
     else:
         pass
