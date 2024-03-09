@@ -4,8 +4,8 @@ import sys
 
 #from KineticAssembly_AD.vectorized_rxn_net import VectorizedRxnNet
 #from KineticAssembly_AD import ReactionNetwork
-from reaction_network import ReactionNetwork
-from vectorized_rxn_net import VectorizedRxnNet
+from .reaction_network import ReactionNetwork
+from .vectorized_rxn_net import VectorizedRxnNet
 import numpy as np
 
 from torch import DoubleTensor as Tensor

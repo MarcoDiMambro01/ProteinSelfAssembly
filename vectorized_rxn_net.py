@@ -7,7 +7,7 @@ from typing import Tuple
 #from KineticAssembly_AD import ReactionNetwork
 #from KineticAssembly_AD import reaction_network as RN
 
-from reaction_network import ReactionNetwork
+from .reaction_network import ReactionNetwork
 import reaction_network as RN
 
 import networkx as nx

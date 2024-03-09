@@ -1,9 +1,10 @@
 import sys
-sys.path.append("../../")
+#sys.path.append("../../")
 
 
-from vec_sim import VecSim
-from reaction_network import ReactionNetwork
+from .vec_sim import VecSim
+from .reaction_network import ReactionNetwork
+
 import numpy as np
 
 from torch import DoubleTensor as Tensor

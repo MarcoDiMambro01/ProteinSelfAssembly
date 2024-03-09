@@ -1,5 +1,5 @@
 
-from trap_metric import TrapMetric
+from .trap_metric import TrapMetric
 import numpy as np
 import matplotlib.pyplot as plt
 
