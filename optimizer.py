@@ -401,7 +401,7 @@ class Optimizer:
                             new_params = [l.clone().detach() for l in self.rn.params_k]
                             # new_params = self.rn.params_k.clone().detach()
                     else:
-                        new_params = self.rn.kon.clone()#.detach()
+                        new_params = self.rn.kon#.clone().detach()
                     #print('New reaction rates: ' + str(self.rn.kon.clone().detach()))
                     # new_params = self.rn.kon.clone().detach()
                     print('current params:', str(new_params))
