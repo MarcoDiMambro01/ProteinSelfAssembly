@@ -55,33 +55,33 @@ def execute(yield_time=0.0, **args):
 
     #create reaction network
     rn = ReactionNetwork(base_input, one_step=True)
-    #rn.resolve_tree()  
+    rn.resolve_tree()  
 
-    # #Changing k_on
-    # uid_dict = {}    
-    # for n in rn.network.nodes():
-    #     for k,v in rn.network[n].items():
-    #         uid = v['uid']
-    #         r1 = set(gtostr(rn.network.nodes[n]['struct']))
-    #         p = set(gtostr(rn.network.nodes[k]['struct']))
-    #         r2 = p-r1
-    #         reactants = (r1,r2)
-    #         uid_dict[(n,k)] = uid
+    #Changing k_on
+    uid_dict = {}    
+    for n in rn.network.nodes():
+        for k,v in rn.network[n].items():
+            uid = v['uid']
+            r1 = set(gtostr(rn.network.nodes[n]['struct']))
+            p = set(gtostr(rn.network.nodes[k]['struct']))
+            r2 = p-r1
+            reactants = (r1,r2)
+            uid_dict[(n,k)] = uid
 
-    # new_kon = torch.zeros([rn._rxn_count], requires_grad=True).double()
-    # new_kon = new_kon + Tensor([1.]*np.array(args.get("k")))
+    new_kon = torch.zeros([rn._rxn_count], requires_grad=True).double()
+    new_kon = new_kon + Tensor([1.]*np.array(args.get("k")))
 
-    # update_kon_dict = {}
-    # for edge in rn.network.edges:
-    #     #print(rn.network.get_edge_data(edge[0],edge[1]))
-    #     update_kon_dict[edge] = new_kon[uid_dict[edge]]
+    update_kon_dict = {}
+    for edge in rn.network.edges:
+        #print(rn.network.get_edge_data(edge[0],edge[1]))
+        update_kon_dict[edge] = new_kon[uid_dict[edge]]
 
-    # nx.set_edge_attributes(rn.network,update_kon_dict,'k_on')
+    nx.set_edge_attributes(rn.network,update_kon_dict,'k_on')
 
 
-    # #Creating the vectorized network
-    # vec_rn = VectorizedRxnNet(rn, dev='cpu')
-    # vec_rn.reset(reset_params=True)
+    #Creating the vectorized network
+    vec_rn = VectorizedRxnNet(rn, dev='cpu')
+    vec_rn.reset(reset_params=True)
 
     
     rn.reset()
