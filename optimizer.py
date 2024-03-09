@@ -319,7 +319,8 @@ class Optimizer:
             # update tracked data
             self.sim_observables.append(self.rn.observables.copy())
             self.sim_observables[-1]['steps'] = np.array(sim.steps)
-            self.parameter_history.append(self.rn.kon.clone().detach().to(torch.device('cpu')).numpy())
+            #self.parameter_history.append(self.rn.kon.clone().detach().to(torch.device('cpu')).numpy())
+            self.parameter_history.append(self.rn.kon.clone().detach().to(torch.device(device)).numpy())
 
 
 
