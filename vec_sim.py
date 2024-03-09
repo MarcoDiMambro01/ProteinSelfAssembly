@@ -209,6 +209,7 @@ class VecSim:
         else:
             l_k = self.rn.compute_log_constants(self.rn.kon, self.rn.rxn_score_vec, self._constant)
             if verbose:
+                print(f"l_k: {l_k}")
                 print("Simulation rates: ",torch.exp(l_k))
 
         while cur_time < self.runtime:
