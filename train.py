@@ -21,7 +21,7 @@ from torch import DoubleTensor as Tensor
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-def init(Size="trimer", **args):
+def init(Size="tetramer", **args):
 
     if args.get("size")==3:
         Size="trimer"
@@ -29,6 +29,7 @@ def init(Size="trimer", **args):
         Size="tetramer"
     else:
         pass
+    #print(f"Size: {Size}")
     
     if args.get("protocol")==None:
         base_input = f'{args.get("topology")}_{Size}_dG_{args.get("dG")}.pwr'
