@@ -306,6 +306,7 @@ class Optimizer:
                                                         verbose=True,
                                                         yield_species=yield_species
                                                     )
+                print("kon:{self.rn.kon}")
                 print("check 4")
             #print("Type/class of yield: ", type(total_yield))
 
