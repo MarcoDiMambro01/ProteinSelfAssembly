@@ -103,7 +103,7 @@ def execute(yield_time=0.0, **args):
     
     #Perform the optimization
     optim.rn.update_reaction_net(rn)
-    optim.optimize(conc_scale=args.get("conc_scale"),conc_thresh=args.get("conc_thresh"),mod_bool=True,optim=args.get("optim"),yield_species=indx)
+    optim.optimize(conc_scale=args.get("conc_scale"),conc_thresh=args.get("conc_thresh"),mod_bool=True,verbose=True,optim=args.get("optim"),yield_species=indx)
     
 
     yield {
