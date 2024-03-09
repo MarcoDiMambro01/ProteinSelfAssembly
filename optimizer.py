@@ -330,7 +330,7 @@ class Optimizer:
             #self.parameter_history.append(self.rn.kon.clone().detach().to(torch.device('cpu')).numpy())
             print("check 8")
 
-            self.parameter_history.append(self.rn.kon.clone().detach().to(torch.device(device)).numpy())
+            self.parameter_history.append(self.rn.kon.clone().detach().to(torch.device(self.dev)).numpy())
 
             print("check 9")
 
