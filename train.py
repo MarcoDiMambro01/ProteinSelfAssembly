@@ -32,7 +32,7 @@ def init(Size="tetramer", **args):
     #print(f"Size: {Size}")
     
     if args.get("protocol")==None:
-        base_input = f'{args.get("topology")}_{Size}_dG_{args.get("dG")}.pwr'
+        base_input = f'ProteinSelfAssembly/{args.get("topology")}_{Size}_dG_{args.get("dG")}.pwr'
     elif args.get("protocol")=='A':
         base_input = f'{args.get("topology")}_{Size}_dG_{args.get("dG")}_rategrowth.pwr'
     else:
