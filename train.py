@@ -7,13 +7,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 import copy
-from reaction_network import ReactionNetwork
-from reaction_network import gtostr
-from vectorized_rxn_net import VectorizedRxnNet 
-from vec_sim import VecSim
-from optimizer import Optimizer
-from trap_metric import TrapMetric
-from compute_trap_factor import ComputeTrapFactor
+from .reaction_network import ReactionNetwork, gtostr
+from .vectorized_rxn_net import VectorizedRxnNet 
+from .vec_sim import VecSim
+from .optimizer import Optimizer
+from .trap_metric import TrapMetric
+from .compute_trap_factor import ComputeTrapFactor
 
 import networkx as nx
 import torch
