@@ -21,7 +21,7 @@ from torch import DoubleTensor as Tensor
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-def init(size,protocol,topology,dG **args):
+def init(size,protocol,topology,dG, **args):
 
     if size==3:
         final_size="trimer"
