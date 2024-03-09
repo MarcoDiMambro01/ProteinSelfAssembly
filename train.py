@@ -21,11 +21,11 @@ from torch import DoubleTensor as Tensor
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-def init(Size="tetramer", **args):
+def init(size, **args):
 
-    if args.get("size")==3:
+    if size==3:
         Size="trimer"
-    elif args.get("size")==4:
+    elif size==4:
         Size="tetramer"
     else:
         pass
@@ -51,7 +51,7 @@ def execute(yield_time=0.0, **args):
         'finished': False,
     }
 
-    base_input = init(**args)
+    base_input = init(args.get("size"),**args)
 
     #create reaction network
     rn = ReactionNetwork(base_input, one_step=True)
