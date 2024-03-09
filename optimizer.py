@@ -270,6 +270,8 @@ class Optimizer:
                                      device=self.dev,
                                      calc_flux=calc_flux_optim)
                 print("check 2")
+                print(f"kon: {self.rn.kon}")
+
 
             # Perform simulation
             self.optimizer.zero_grad()
