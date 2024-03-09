@@ -51,9 +51,9 @@ class VecSim:
         """
 
         # Choose device on which to simulate
-        if torch.cuda.is_available() and "cpu" not in device:
+        if torch.cuda.is_available():# and "cpu" not in device:
             self.dev = torch.device(device)
-            print("Using " + device)
+            #print("Using " + device)
         else:
             self.dev = torch.device("cpu")
             print("Using CPU")

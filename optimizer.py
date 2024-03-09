@@ -259,7 +259,7 @@ class Optimizer:
                 print("New Runtime:", new_runtime)
                 sim = self.sim_class(self.rn,
                                      new_runtime,
-                                     device=self._dev_name,
+                                     device=self.dev,
                                      calc_flux=calc_flux_optim)
                 # print(sim.calc_flux)
             else:

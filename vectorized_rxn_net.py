@@ -63,7 +63,7 @@ class VectorizedRxnNet:
         self._R = Tensor([8.314])  # J / mol * K
         self._T = Tensor([273.15])  # K
         self._C0 = Tensor([std_c])    #Std. Conc in uM
-        self.dev=dev
+        #self.dev=dev
 
         #Variables for zeroth order reactions
         self.boolCreation_rxn = rn.boolCreation_rxn
