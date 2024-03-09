@@ -265,7 +265,7 @@ class Optimizer:
             else:
                 sim = self.sim_class(self.rn,
                                      self.sim_runtime,
-                                     device=self._dev_name,
+                                     device=self.dev,
                                      calc_flux=calc_flux_optim)
 
             # Perform simulation
