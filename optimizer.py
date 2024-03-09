@@ -292,16 +292,16 @@ class Optimizer:
                                  verbose=verbose,
                                  yield_species=yield_species)
             else:
-                total_yield, total_flux = \
-                    sim.simulate(optim,
-                                 node_str,
-                                 corr_rxns=corr_rxns,
-                                 conc_scale=conc_scale,
-                                 mod_factor=mod_factor,
-                                 conc_thresh=conc_thresh,
-                                 mod_bool=mod_bool,
-                                 verbose=verbose,
-                                 yield_species=yield_species)
+                total_yield, total_flux = sim.simulate(optim,
+                                                        node_str,
+                                                        corr_rxns=corr_rxns,
+                                                        conc_scale=conc_scale,
+                                                        mod_factor=mod_factor,
+                                                        conc_thresh=conc_thresh,
+                                                        mod_bool=mod_bool,
+                                                        verbose=verbose,
+                                                        yield_species=yield_species
+                                                    )
             #print("Type/class of yield: ", type(total_yield))
 
             #Check change in yield from last gradient step. Break if less than a tolerance
