@@ -639,11 +639,11 @@ class VectorizedRxnNet:
                     koff_list = torch.cat([koff_list,self.params_koff[i]])
                 koff_list.requires_grad_(True)
                 # print("Ordered koff rates: ",koff_list[order])
-                new_l_koff = torch.log(koff_list[order]).to(dev)
+                new_l_koff = torch.log(koff_list[order]).to(self.dev)
                 # new_l_koff = torch.cat([new_l_koff_01,new_l_koff_02],dim=0)
                 new_l_koff.requires_grad_(True)
                 # print("Simulation offrates: ",torch.exp(new_l_koff))
-                new_l_kon = new_l_koff - (dGrxn * scalar_modifier) - torch.log(self._C0).to(dev)
+                new_l_kon = new_l_koff - (dGrxn * scalar_modifier) - torch.log(self._C0).to(self.dev)
                 # print(new_l_kon)
                 new_l_k = torch.cat([new_l_kon,new_l_koff],dim=0)
                 return(new_l_k.clone().to(self.dev))
@@ -950,7 +950,7 @@ class VectorizedRxnNet:
                 #Calculate k_off also
                 std_c = Tensor([1e6])
                 l_kon = torch.log(temp_kon)
-                l_koff = (self.rxn_score_vec[uid]) + l_kon + torch.log(std_c).to(dev)
+                l_koff = (self.rxn_score_vec[uid]) + l_kon + torch.log(std_c).to(self.dev)
                 koff = torch.exp(l_koff)
 
                 #Getting conc. of reactants and products
@@ -989,7 +989,7 @@ class VectorizedRxnNet:
                 #Get consumption rates; which is k_off
                 std_c = Tensor([1e6])
                 l_kon = torch.log(temp_kon)
-                l_koff = (self.rxn_score_vec[uid]) + l_kon + torch.log(std_c).to(dev)
+                l_koff = (self.rxn_score_vec[uid]) + l_kon + torch.log(std_c).to(self.dev)
                 koff = torch.exp(l_koff)
 
                 #Get conc. of reactants and products
