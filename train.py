@@ -23,12 +23,14 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def init(size,protocol,topology,dG, **args):
 
+    print(size)
     if size==3:
         final_size="trimer"
     elif size==4:
         final_size="tetramer"
     else:
-        pass
+        final_size="trimer"
+
     print(f"Size: {final_size}")
     
     if protocol==None:
