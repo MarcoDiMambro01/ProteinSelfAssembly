@@ -40,7 +40,7 @@ def init(Size="trimer", **args):
 
     print('File found', flush=True)
    
-    return base_input,k_on
+    return base_input
 
 
 def execute(yield_time=0.0, **args):
