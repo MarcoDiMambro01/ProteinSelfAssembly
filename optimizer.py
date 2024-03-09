@@ -263,10 +263,12 @@ class Optimizer:
                                      calc_flux=calc_flux_optim)
                 # print(sim.calc_flux)
             else:
+                print("check 1")
                 sim = self.sim_class(self.rn,
                                      self.sim_runtime,
                                      device=self.dev,
                                      calc_flux=calc_flux_optim)
+                print("check 2")
 
             # Perform simulation
             self.optimizer.zero_grad()
@@ -292,6 +294,7 @@ class Optimizer:
                                  verbose=verbose,
                                  yield_species=yield_species)
             else:
+                print("check 3")
                 total_yield, total_flux = sim.simulate(optim,
                                                         node_str,
                                                         corr_rxns=corr_rxns,
@@ -299,9 +302,10 @@ class Optimizer:
                                                         mod_factor=mod_factor,
                                                         conc_thresh=conc_thresh,
                                                         mod_bool=mod_bool,
-                                                        verbose=verbose,
+                                                        verbose=True,
                                                         yield_species=yield_species
                                                     )
+                print("check 4")
             #print("Type/class of yield: ", type(total_yield))
 
             #Check change in yield from last gradient step. Break if less than a tolerance
