@@ -51,7 +51,7 @@ def execute(yield_time=0.0, **args):
         'finished': False,
     }
 
-    base_input = init(args.get("size"),**args)
+    base_input = init(**args)
 
     #create reaction network
     rn = ReactionNetwork(base_input, one_step=True)
