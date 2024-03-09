@@ -29,13 +29,13 @@ class Optimizer:
                  random_lr=False):
 
         # Load device for PyTorch (e.g. GPU or CPU)
-        if torch.cuda.is_available() and "cpu" not in device:
+        if torch.cuda.is_available():# and "cpu" not in device:
             self.dev = torch.device(device)
             print("Using " + device)
         else:
             self.dev = torch.device("cpu")
             device = 'cpu'
-            # print("Using CPU")
+            print("Using CPU")
         self._dev_name = device
 
         self.sim_class = VecSim
