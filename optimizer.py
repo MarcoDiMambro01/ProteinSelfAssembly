@@ -239,6 +239,8 @@ class Optimizer:
             calc_flux_optim = True
         for i in range(self.optim_iterations):
             # Reset for new simulator
+            print("check 0")
+            print(f"kon:{self.rn.kon}")
             self.rn.reset()
 
             if self.rn.boolCreation_rxn and change_runtime:
