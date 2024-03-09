@@ -318,16 +318,22 @@ class Optimizer:
             #         return self.rn
             # else:
             #     counter = 0
+            print("check 5")
+
             self.yield_per_iter.append(total_yield.item())
             # self.flux_per_iter.append(total_flux.item())
             # update tracked data
+            print("check 6")
             self.sim_observables.append(self.rn.observables.copy())
+            print("check 7")
             self.sim_observables[-1]['steps'] = np.array(sim.steps)
             #self.parameter_history.append(self.rn.kon.clone().detach().to(torch.device('cpu')).numpy())
+            print("check 8")
+
             self.parameter_history.append(self.rn.kon.clone().detach().to(torch.device(device)).numpy())
 
+            print("check 9")
 
-            print("check 5")
             if optim in ['yield', 'time']:
                 if optim == 'yield':
                     print(f'Yield on sim. iteration {i} was {str(total_yield.item() * 100)[:4]}%.')
