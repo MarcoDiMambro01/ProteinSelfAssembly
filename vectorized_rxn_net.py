@@ -131,6 +131,7 @@ class VectorizedRxnNet:
                     # if i not in cid.keys():
                         ##Independent reactions
                     self.params_kon[rid] = self.kon.clone().detach()[rn.rxn_class[(1,1)][i]]
+                    #self.params_kon[rid] = self.kon.clone()[rn.rxn_class[(1,1)][i]]
                     self.params_rxn_score_vec[rid] = self.rxn_score_vec[rn.rxn_class[(1,1)][i]]
                     self.coup_map[rn.rxn_class[(1,1)][i]]=rid           #Map reaction index for independent reactions in self.kon to self.params_kon. Used to set the self.kon from self.params_kon
                     rid+=1
@@ -153,8 +154,10 @@ class VectorizedRxnNet:
             self.params_rxn_score_vec = torch.zeros([c_rxn_count]).double()
             for i in range(c_rxn_count):
                 params_kon[i] = self.kon.clone().detach()[self.optim_rates[i]]
+                #params_kon[i] = self.kon.clone()[self.optim_rates[i]]
                 self.params_rxn_score_vec[i] = self.rxn_score_vec[self.optim_rates[i]]
                 self.initial_params.append(self.kon.clone().detach()[self.optim_rates[i]])
+                #self.initial_params.append(self.kon.clone()[self.optim_rates[i]])
             self.params_kon=[]
             for i in range(len(params_kon)):
                 print(params_kon.clone().detach()[i])
@@ -593,7 +596,7 @@ class VectorizedRxnNet:
         # std_c = Tensor([1e6])  # units umols / L
         l_kon = torch.log(kon)  # umol-1 s-1
         # l_koff = (dGrxn * scalar_modifier / (self._R * self._T)) + l_kon + torch.log(std_c)       #Units of dG in J/mol
-        l_koff = (dGrxn * scalar_modifier) + l_kon + torch.log(self._C0)
+        l_koff = (dGrxn * scalar_modifier) + l_kon + torch.log(self._C0).to(device)
         # print(torch.exp(l_kon))
         # print(torch.exp(l_koff))       #Units of dG in J/mol
         l_k = torch.cat([l_kon, l_koff], dim=0)
@@ -610,7 +613,7 @@ class VectorizedRxnNet:
                 kon[self.paramid_uid_map[i]]= self.chap_params[i+n_copy_params]
             l_kon = torch.log(kon)  # umol-1 s-1
 
-            l_koff = (dGrxn * scalar_modifier) + l_kon + torch.log(self._C0)
+            l_koff = (dGrxn * scalar_modifier) + l_kon + torch.log(self._C0).to(device)
             l_k = torch.cat([l_kon, l_koff], dim=0)
             return(l_k)
 
@@ -636,7 +639,7 @@ class VectorizedRxnNet:
                     koff_list = torch.cat([koff_list,self.params_koff[i]])
                 koff_list.requires_grad_(True)
                 # print("Ordered koff rates: ",koff_list[order])
-                new_l_koff = torch.log(koff_list[order])
+                new_l_koff = torch.log(koff_list[order]).to(device)
                 # new_l_koff = torch.cat([new_l_koff_01,new_l_koff_02],dim=0)
                 new_l_koff.requires_grad_(True)
                 # print("Simulation offrates: ",torch.exp(new_l_koff))
@@ -947,7 +950,7 @@ class VectorizedRxnNet:
                 #Calculate k_off also
                 std_c = Tensor([1e6])
                 l_kon = torch.log(temp_kon)
-                l_koff = (self.rxn_score_vec[uid]) + l_kon + torch.log(std_c)
+                l_koff = (self.rxn_score_vec[uid]) + l_kon + torch.log(std_c).to(device)
                 koff = torch.exp(l_koff)
 
                 #Getting conc. of reactants and products
@@ -986,7 +989,7 @@ class VectorizedRxnNet:
                 #Get consumption rates; which is k_off
                 std_c = Tensor([1e6])
                 l_kon = torch.log(temp_kon)
-                l_koff = (self.rxn_score_vec[uid]) + l_kon + torch.log(std_c)
+                l_koff = (self.rxn_score_vec[uid]) + l_kon + torch.log(std_c).to(device)
                 koff = torch.exp(l_koff)
 
                 #Get conc. of reactants and products
