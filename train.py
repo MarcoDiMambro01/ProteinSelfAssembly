@@ -33,9 +33,9 @@ def init(**args):
     
     if args.get("protocol")==None:
         base_input = f'input_files/{args.get("topology")}_{Size}_dG_{args.get("dG")}.pwr'
-    elif args.get("protocol")=='A'
+    elif args.get("protocol")=='A':
         base_input = f'input_files/{args.get("topology")}_{Size}_dG_{args.get("dG")}_rategrowth.pwr'
-    else 
+    else:
         pass
         #aggiungere gli altri protocolli
 
