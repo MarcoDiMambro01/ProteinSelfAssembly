@@ -496,8 +496,13 @@ class Optimizer:
                             cost.backward(retain_graph=True)
                         else:
                             print("check 11")
-                            k = torch.exp(self.rn.compute_log_constants(self.rn.kon, self.rn.rxn_score_vec,
-                                                            scalar_modifier=1.))
+                            #l_k=self.rn.compute_log_constants(self.rn.kon, self.rn.rxn_score_vec, scalar_modifier=1.)
+
+                            l_kon = torch.log(self.rn.kon)       
+                            l_koff = (self.rn.rxn_score_vec) + l_kon + torch.log(self.rn._C0)#.to(self.dev)
+                            l_k = torch.cat([l_kon, l_koff], dim=0)
+
+                            k = torch.exp(l_k)
                             curr_lr = self.optimizer.state_dict()['param_groups'][0]['lr']
                             physics_penalty = torch.sum(10 * F.relu(-1 * (k - curr_lr * 10))).to(self.dev) + torch.sum(10 * F.relu(1 * (k - max_thresh))).to(self.dev)
                             if lowvar:
