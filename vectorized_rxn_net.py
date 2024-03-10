@@ -80,9 +80,9 @@ class VectorizedRxnNet:
             self.optimize_species=rn.optimize_species
 
         self.M, self.kon, self.rxn_score_vec, self.copies_vec = self.generate_vectorized_representation(rn)
-        print("check generate:")
-        print("dev kon:",self.kon.get_device())
-        print("dev rxn:",self.rxn_score_vec.get_device())
+        #print("check generate:")
+        #print("dev kon:",self.kon.get_device())
+        #print("dev rxn:",self.rxn_score_vec.get_device())
         self.rxn_coupling = coupling
         self.coupling = rn.rxn_coupling
         self.num_monomers = rn.num_monomers
@@ -152,9 +152,9 @@ class VectorizedRxnNet:
 
         print("Shifting to device: ", dev)
         self.to(dev)
-        print("check after shift:")
-        print("dev kon:",self.kon.get_device())
-        print("dev rxn:",self.rxn_score_vec.get_device())
+        #print("check after shift:")
+        #print("dev kon:",self.kon.get_device())
+        #print("dev rxn:",self.rxn_score_vec.get_device())
 
 
     def reset(self, reset_params=False):
@@ -323,9 +323,9 @@ class VectorizedRxnNet:
         #return l_k.clone()
     
     def update_reaction_net(self, rn, scalar_modifier: int = 1):
-            print("check a-update")
-            print("dev kon:",self.kon.get_device())
-            print("dev rxn:",self.rxn_score_vec.get_device())
+            #print("check a-update")
+            #print("dev kon:",self.kon.get_device())
+            #print("dev rxn:",self.rxn_score_vec.get_device())
 
 
             for n in rn.network.nodes:
