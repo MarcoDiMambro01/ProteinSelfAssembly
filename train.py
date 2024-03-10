@@ -103,7 +103,10 @@ def execute(yield_time=0.0, **args):
     labels=nx.get_node_attributes(rn.network, 'struct')
     nodes_list_2 = [gtostr(labels[key]) for key in labels.keys()]
     longest_name = max(nodes_list_2, key=len)
-    indx = nodes_list_2.index(longest_name)     
+    indx = nodes_list_2.index(longest_name)    
+
+    print("k on:",optim.rn.kon)
+    print("rn scores: ",optim.rn.rxn_score_vec) 
     
     #Perform the optimization
     optim.rn.update_reaction_net(rn)
