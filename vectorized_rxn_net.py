@@ -228,7 +228,7 @@ class VectorizedRxnNet:
         # initialize tensor representation dimensions
         M = torch.zeros((num_states, rn._rxn_count * 2)).double()
         #kon = torch.zeros([rn._rxn_count], requires_grad=True).double()
-        kon = torch.zeros([rn._rxn_count], requires_grad=True).double()
+        kon = torch.zeros([rn._rxn_count]).double()
         rxn_score_vec = torch.zeros([rn._rxn_count]).double()
         copies_vec = torch.zeros([num_states]).double()
 
