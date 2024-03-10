@@ -88,10 +88,14 @@ def execute(yield_time=0.0, **args):
     
     rn.reset()
     rn.intialize_activations()
+
+    print("iter: ",args['iter'])
+
+
     #Optimizer
     optim = Optimizer(reaction_network=rn,
                     sim_runtime=args["runtime"],
-                    optim_iterations=args["iter"],
+                    optim_iterations=args['iter'],
                     learning_rate=args["lr"],
                     device=device,method="Adam")
 
