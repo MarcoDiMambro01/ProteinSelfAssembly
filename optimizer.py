@@ -343,9 +343,9 @@ class Optimizer:
                             print("cost: ",cost)
 
                             cost.backward(retain_graph=True)
-                            
-                            print("Grad: ",self.rn.kon.grad)
-                            print("Finite:",torch.isfinite(self.rn.kon.grad))
+
+                            print("Grad: ",self.rn.params_kon.grad)
+                            print("Finite:",torch.isfinite(self.rn.params_kon.grad))
                             print("K:", k)
                             print("curr_lr",curr_lr)
                         else:
