@@ -97,8 +97,7 @@ def execute(yield_time=0.0, **args):
                     sim_runtime=args["runtime"],
                     optim_iterations=args['iter'],
                     learning_rate=args["lr"],
-                    device=device,method="Adam",
-                    conc_thresh=1e-1)
+                    device=device,method="Adam")
 
     #get the index of the final yield    
     labels=nx.get_node_attributes(rn.network, 'struct')
@@ -108,7 +107,7 @@ def execute(yield_time=0.0, **args):
     
     #Perform the optimization
     optim.rn.update_reaction_net(rn)
-    optim.optimize(conc_scale=args.get("conc_scale"),conc_thresh=args.get("conc_thresh"),mod_bool=True,verbose=True,optim=args.get("optim"),yield_species=indx)
+    optim.optimize(conc_scale=args["conc_scale"],conc_thresh=args["conc_thresh"],mod_bool=True,verbose=True,optim=args["optim"],yield_species=indx)
     
 
     yield {
