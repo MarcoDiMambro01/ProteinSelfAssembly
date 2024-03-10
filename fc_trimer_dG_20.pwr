@@ -1,5 +1,6 @@
 begin parameters
     default_assoc   1.
+    homo_rates True
 end parameters
 
 begin species
