@@ -599,8 +599,8 @@ class VectorizedRxnNet:
         l_koff = (dGrxn * scalar_modifier) + l_kon + torch.log(self._C0).to(self.dev)
         # print(torch.exp(l_kon))
         # print(torch.exp(l_koff))       #Units of dG in J/mol
-        with torch.no_grad():
-            l_k = torch.cat([l_kon, l_koff], dim=0)
+        #with torch.no_grad():
+        l_k = torch.cat([l_kon, l_koff], dim=0)
         if self.boolCreation_rxn or self.boolDestruction_rxn:
             num_creat_dest_rxn = len(self.creation_rxn_data) + len(self.destruction_rxn_data)
             new_l_k = l_k[:-num_creat_dest_rxn]
