@@ -169,6 +169,7 @@ class VectorizedRxnNet:
                 print("is Leaf: ",self.params_kon[i].is_leaf)
 
         elif self.homo_rates == True:
+            print("Check a1")
             self.params_kon = torch.zeros([len(self.rxn_class.keys())],requires_grad=True).double()
             self.params_rxn_score_vec = torch.zeros([len(self.rxn_class.keys())]).double()
             counter=0
@@ -179,6 +180,7 @@ class VectorizedRxnNet:
                 counter+=1
             self.params_kon.requires_grad_(True)
             self.initial_params = Tensor(self.params_kon).clone().detach()
+            print("check a2")
         elif dissoc_is_param:
             if self.partial_opt == False:
                 # self.params_koff = torch.zeros([rn._rxn_count],requires_grad=True).double()             #kon from input; koff evaluated here
@@ -596,7 +598,7 @@ class VectorizedRxnNet:
         # std_c = Tensor([1e6])  # units umols / L
         print("k_on: ",kon)
         print("rn score: ",dGrxn)
-        
+
         l_kon = torch.log(kon)  # umol-1 s-1
         # l_koff = (dGrxn * scalar_modifier / (self._R * self._T)) + l_kon + torch.log(std_c)       #Units of dG in J/mol
         l_koff = (dGrxn * scalar_modifier) + l_kon + torch.log(self._C0).to(self.dev)
@@ -881,6 +883,7 @@ class VectorizedRxnNet:
         return l_c_prod_vec
 
     def update_reaction_net(self, rn, scalar_modifier: int = 1):
+        print("check a-update")
         for n in rn.network.nodes:
             rn.network.nodes[n]['copies'] = self.copies_vec[n].item()
             for r_set in rn.get_reactant_sets(n):

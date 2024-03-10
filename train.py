@@ -97,8 +97,7 @@ def execute(yield_time=0.0, **args):
                     sim_runtime=args["runtime"],
                     optim_iterations=args['iter'],
                     learning_rate=args["lr"],
-                    device=device,method="Adam",
-                    device=device)
+                    device=device,method="Adam")
 
     #get the index of the final yield    
     labels=nx.get_node_attributes(rn.network, 'struct')
