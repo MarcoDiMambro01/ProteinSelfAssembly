@@ -495,12 +495,19 @@ class Optimizer:
                             cost = -total_yield + physics_penalty
                             cost.backward(retain_graph=True)
                         else:
+                            print("rn score: ",self.rn.rxn_score_vec)
+                            print("K_on: ",self.rn.kon)
+                            print("c0: ",self.rn._C0)
                             print("check 11")
                             #log_k=self.rn.compute_log_constants(self.rn.kon, self.rn.rxn_score_vec, scalar_modifier=1.)
                             # l_kon = torch.log(self.rn.kon)       
                             # l_koff = (self.rn.rxn_score_vec) + l_kon + torch.log(self.rn._C0).to(self.dev)
                             # l_k = torch.cat([l_kon, l_koff], dim=0)
                             # log_k=l_k.clone().to(self.dev)
+                            print("rn score: ",self.rn.rxn_score_vec)
+                            print("K_on: ",self.rn.kon)
+                            print("c0: ",self.rn._C0)
+
 
                             k_off=torch.exp(self.rn.rxn_score_vec)*self.rn.kon*self.rn._C0
                             print("K_off: ",k_off)
