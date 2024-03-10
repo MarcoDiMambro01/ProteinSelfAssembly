@@ -2,6 +2,7 @@ import sys
 #sys.path.append("../../")
 
 import torch
+import torch.nn as nn
 from torch.nn import functional as F
 import numpy as np
 import matplotlib.pyplot as plt
