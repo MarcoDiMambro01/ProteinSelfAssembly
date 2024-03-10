@@ -516,7 +516,7 @@ class Optimizer:
                             #k = torch.exp(log_k)
                             print("K: ",k)
                             curr_lr = self.optimizer.state_dict()['param_groups'][0]['lr']
-                            physics_penalty = torch.sum(10 * F.relu(-1 * (k - curr_lr * 10))).to(self.dev) + torch.sum(10 * F.relu(1 * (k - max_thresh))).to(self.dev)
+                            physics_penalty = 0#torch.sum(10 * F.relu(-1 * (k - curr_lr * 10))).to(self.dev) + torch.sum(10 * F.relu(1 * (k - max_thresh))).to(self.dev)
                             if lowvar:
                                 mon_rxn = self.rn.rxn_class[1]
                                 var_penalty = 100*F.relu(1 * (torch.var(k[mon_rxn])))
