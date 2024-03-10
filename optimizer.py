@@ -501,8 +501,9 @@ class Optimizer:
                             l_kon = torch.log(self.rn.kon)       
                             l_koff = (self.rn.rxn_score_vec) + l_kon + torch.log(self.rn._C0).to(self.dev)
                             l_k = torch.cat([l_kon, l_koff], dim=0)
+                            log_k=l_k.clone().to(self.dev)
 
-                            k = torch.exp(l_k)
+                            k = torch.exp(log_k)
                             curr_lr = self.optimizer.state_dict()['param_groups'][0]['lr']
                             physics_penalty = torch.sum(10 * F.relu(-1 * (k - curr_lr * 10))).to(self.dev) + torch.sum(10 * F.relu(1 * (k - max_thresh))).to(self.dev)
                             if lowvar:
