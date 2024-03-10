@@ -506,9 +506,10 @@ class Optimizer:
                             print("K_on: ",self.rn.kon)
                             print("c0: ",self.rn._C0)
 
-
-                            k_off=(torch.exp(self.rn.rxn_score_vec))*self.rn.kon*10e6 #self.rn._C0
-                            print("K_off: ",k_off)
+                            with torch.no_grad:
+                                k_off=(torch.exp(self.rn.rxn_score_vec))*self.rn.kon*10e6 #self.rn._C0
+                                print("K_off: ",k_off)
+                                
                             k=torch.cat([self.rn.kon, k_off], dim=0).to(self.dev)
 
                             #print("log_k: ",log_k)
@@ -516,7 +517,7 @@ class Optimizer:
                             #k = torch.exp(log_k)
                             print("K: ",k)
                             curr_lr = self.optimizer.state_dict()['param_groups'][0]['lr']
-                            physics_penalty = 0#torch.sum(10 * F.relu(-1 * (k - curr_lr * 10))).to(self.dev) + torch.sum(10 * F.relu(1 * (k - max_thresh))).to(self.dev)
+                            physics_penalty = torch.sum(10 * F.relu(-1 * (k - curr_lr * 10))).to(self.dev) + torch.sum(10 * F.relu(1 * (k - max_thresh))).to(self.dev)
                             if lowvar:
                                 mon_rxn = self.rn.rxn_class[1]
                                 var_penalty = 100*F.relu(1 * (torch.var(k[mon_rxn])))
