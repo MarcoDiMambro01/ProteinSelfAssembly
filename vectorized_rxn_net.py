@@ -304,12 +304,12 @@ class VectorizedRxnNet:
         print("k_on: ",kon)
         print("check device:",kon.get_device())
         print("rn score: ",dGrxn)
-        self._C0=self._C0.to(self.dev)
 
         l_kon = torch.log(kon)  # umol-1 s-1
+        l_kon = l_kon.to(self.dev)
         # l_koff = (dGrxn * scalar_modifier / (self._R * self._T)) + l_kon + torch.log(std_c)       #Units of dG in J/mol
         #l_koff = (dGrxn * scalar_modifier) + l_kon + torch.log(self._C0).to(self.dev)
-        l_koff = (dGrxn) + l_kon + torch.log(1e6).to(self.dev)
+        l_koff = (dGrxn) + l_kon + torch.log(self._C0).to(self.dev)
 
         # print(torch.exp(l_kon))
         # print(torch.exp(l_koff))       #Units of dG in J/mol
