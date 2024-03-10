@@ -87,7 +87,7 @@ def execute(yield_time=0.0, **args):
 
     
     rn.reset()
-    rn.intialize_activations()
+    #rn.intialize_activations()
 
     print("iter: ",args['iter'])
 
