@@ -596,7 +596,9 @@ class VectorizedRxnNet:
         """
         # above conversions cancel
         # std_c = Tensor([1e6])  # units umols / L
+        print("compute log")
         print("k_on: ",kon)
+        print("check device:",kon.get_device())
         print("rn score: ",dGrxn)
 
         l_kon = torch.log(kon)  # umol-1 s-1
@@ -884,6 +886,8 @@ class VectorizedRxnNet:
 
     def update_reaction_net(self, rn, scalar_modifier: int = 1):
         print("check a-update")
+        print("check device:",self.kon.get_device())
+
         for n in rn.network.nodes:
             rn.network.nodes[n]['copies'] = self.copies_vec[n].item()
             for r_set in rn.get_reactant_sets(n):
