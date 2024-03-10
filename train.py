@@ -82,8 +82,8 @@ def execute(yield_time=0.0, **args):
 
 
     #Creating the vectorized network
-    vec_rn = VectorizedRxnNet(rn, dev=device)
-    vec_rn.reset(reset_params=True)
+    #vec_rn = VectorizedRxnNet(rn, dev=device)
+    #vec_rn.reset(reset_params=True)
 
     
     rn.reset()
