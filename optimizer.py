@@ -340,7 +340,7 @@ class Optimizer:
                             #l_k=self.rn.compute_log_constants(self.rn.params_kon, self.rn.params_rxn_score_vec,scalar_modifier=1.)
                             #k = torch.exp(l_k)
 
-                            k_off=(torch.exp(self.rn.params_rxn_score_vecself.rn.rxn_score_vec))*self.rn.params_kon*1e6 #self.rn._C0
+                            k_off=(torch.exp(self.rn.params_rxn_score_vec))*self.rn.params_kon*1e6 #self.rn._C0
                             print("K_off: ",k_off)
                             k=torch.cat([self.rn.params_kon, k_off], dim=0).to(self.dev)
 
