@@ -36,7 +36,7 @@ def init(size,protocol,topology,dG, **args):
     if protocol==None:
         base_input = f'ProteinSelfAssembly/{topology}_{final_size}_dG_{dG}.pwr'
     elif protocol=='A':
-        base_input = f'{topology}_{final_size}_dG_{dG}_A.pwr'
+        base_input = f'ProteinSelfAssembly/{topology}_{final_size}_dG_{dG}_A.pwr'
     else:
         pass
         #aggiungere gli altri protocolli
