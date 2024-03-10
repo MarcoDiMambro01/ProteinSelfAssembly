@@ -468,6 +468,10 @@ class VectorizedRxnNet:
                 self.params_kon[i]=nn.Parameter(self.params_kon[i].data.clone().detach().to(dev),requires_grad=True)
         elif self.homo_rates and self.assoc_is_param:
             self.params_kon = nn.Parameter(self.params_kon.data.clone().detach().to(dev), requires_grad=True)
+            
+            #mine
+            self.kon = nn.Parameter(self.kon.data.clone().detach().to(dev))
+
         elif self.dissoc_is_param:
             # self.params_koff = nn.Parameter(self.params_koff.data.clone().detach().to(dev), requires_grad=True)
 
