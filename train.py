@@ -109,7 +109,7 @@ def execute(yield_time=0.0, **args):
     print("rn scores: ",optim.rn.rxn_score_vec) 
     
     #Perform the optimization
-    optim.rn.update_reaction_net(rn)
+    #optim.rn.update_reaction_net(rn)
     optim.optimize(conc_scale=args["conc_scale"],conc_thresh=args["conc_thresh"],mod_bool=True,verbose=True,optim=args["optim"],yield_species=indx)
     
 
