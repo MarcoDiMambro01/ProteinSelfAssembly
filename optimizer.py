@@ -289,8 +289,8 @@ class Optimizer:
             print("check 7")
             self.sim_observables[-1]['steps'] = np.array(sim.steps)
             print("check 8")
-            #self.parameter_history.append(self.rn.kon.clone().detach().to(torch.device(self.dev)).numpy())
-            self.parameter_history.append(self.rn.kon.clone().detach().numpy())
+            self.parameter_history.append(self.rn.kon.clone().detach().to(torch.device("cpu")).numpy())
+            #self.parameter_history.append(self.rn.kon.clone().detach().numpy())
             print("check 9")
 
             if optim in ['yield', 'time']:
