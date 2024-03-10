@@ -198,6 +198,7 @@ class VectorizedRxnNet:
 
         if self.homo_rates and self.assoc_is_param:
             self.params_kon = nn.Parameter(self.params_kon.data.clone().detach().to(dev), requires_grad=True)
+            self.params_rxn_score_vec = self.params_rxn_score_vec.to(dev)
             self.kon = self.kon.to(dev)
 
             #mine
