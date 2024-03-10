@@ -28,7 +28,7 @@ def main():
     parser.add_argument("--optim", default='time')      #parameter of the simulation (time or yield)
 
     parser.add_argument("--lr", default=1e-1)           #learning rate
-    parser.add_argument("--iter", default=2)          #optim iterations
+    parser.add_argument("--iter",type=int, default=2)          #optim iterations
 
     parser.add_argument("--output", type=str, required=True)
 
