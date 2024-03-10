@@ -594,7 +594,8 @@ class VectorizedRxnNet:
         """
         # above conversions cancel
         # std_c = Tensor([1e6])  # units umols / L
-
+        print("k_on: ",self.kon)
+        print("rn score: ",self.rxn_score_vec)
         #with torch.no_grad():
         l_kon = torch.log(kon)  # umol-1 s-1
         # l_koff = (dGrxn * scalar_modifier / (self._R * self._T)) + l_kon + torch.log(std_c)       #Units of dG in J/mol
