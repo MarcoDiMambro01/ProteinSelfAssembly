@@ -304,6 +304,7 @@ class Optimizer:
                 if i != self.optim_iterations - 1:
                                       
                     if self.rn.homo_rates and self.rn.assoc_is_param:
+                        print("check a10")
                         new_params = self.rn.params_kon.clone().detach()
                     else:
                         print("check 10")
