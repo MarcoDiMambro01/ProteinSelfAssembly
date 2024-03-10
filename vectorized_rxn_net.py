@@ -886,6 +886,8 @@ class VectorizedRxnNet:
                 r_tup = tuple(r_set)
                 reaction_id = rn.network.get_edge_data(r_tup[0], n)['uid']
                 for r in r_tup:
+                    print("k_on: ",self.kon)
+                    print("rn score: ",self.rxn_score_vec)
                     k = self.compute_log_constants(self.kon, self.rxn_score_vec, scalar_modifier)
                     k = torch.exp(k)
                     # print("RATEs: ",k)
