@@ -333,12 +333,21 @@ class Optimizer:
 
                     if self.rn.assoc_is_param:
                         if self.rn.homo_rates:
+                            print("check a11")
                             l_k=self.rn.compute_log_constants(self.rn.params_kon, self.rn.params_rxn_score_vec,scalar_modifier=1.)
                             k = torch.exp(l_k)
                             curr_lr = self.optimizer.state_dict()['param_groups'][0]['lr']
                             physics_penalty = torch.sum(10 * F.relu(-1 * (k - curr_lr * 10))).to(self.dev) + torch.sum(10 * F.relu(1 * (k - max_thresh))).to(self.dev) # stops zeroing or negating params
                             cost = -total_yield + physics_penalty
+
+                            print("cost: ",cost)
+
                             cost.backward(retain_graph=True)
+                            
+                            print("Grad: ",self.rn.kon.grad)
+                            print("Finite:",torch.isfinite(self.rn.kon.grad))
+                            print("K:", k)
+                            print("curr_lr",curr_lr)
                         else:
                             print("check 11")
                             log_k=self.rn.compute_log_constants(self.rn.kon, self.rn.rxn_score_vec, scalar_modifier=1.)
@@ -376,7 +385,6 @@ class Optimizer:
                             # dimer_penalty = 10*F.relu(1*(k[16] - self.lr*20))+10*F.relu(1*(k[17] - self.lr*20))+10*F.relu(1*(k[18] - self.lr*20))
                             cost = -total_yield + physics_penalty + var_penalty #+ dimer_penalty#+ var_penalty #+ ratio_penalty
                             print("cost:",cost)
-
                             cost.backward()
                             print("Grad: ",self.rn.kon.grad)
                             print("Finite:",torch.isfinite(self.rn.kon.grad))

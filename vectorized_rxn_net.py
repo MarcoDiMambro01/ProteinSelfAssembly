@@ -301,11 +301,11 @@ class VectorizedRxnNet:
         """
         # above conversions cancel
         # std_c = Tensor([1e6])  # units umols / L
-        print("compute log")
-        print("k_on: ",kon)
-        print("check kon device:",kon.get_device())
-        print("rn score: ",dGrxn)
-        print("check rn device:",dGrxn.get_device())
+        #print("compute log")
+        #print("k_on: ",kon)
+        #print("check kon device:",kon.get_device())
+        #print("rn score: ",dGrxn)
+        #print("check rn device:",dGrxn.get_device())
 
 
         l_kon = torch.log(kon)  # umol-1 s-1
