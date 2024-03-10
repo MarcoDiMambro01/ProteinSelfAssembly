@@ -19,7 +19,8 @@ import torch
 from torch import DoubleTensor as Tensor
 
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device=torch.device("cpu")
 
 def init(size,protocol,topology,dG, **args):
 
