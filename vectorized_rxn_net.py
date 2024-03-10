@@ -152,8 +152,9 @@ class VectorizedRxnNet:
 
         print("Shifting to device: ", dev)
         self.to(dev)
-        print("check k on device:",self.kon.get_device())
-
+        print("check after shift:")
+        print("dev kon:",self.kon.get_device())
+        print("dev rxn:",self.rxn_score_vec.get_device())
 
 
     def reset(self, reset_params=False):
@@ -313,7 +314,26 @@ class VectorizedRxnNet:
         return l_k.clone().to(self.dev)
         #return l_k.clone()
     
+    def update_reaction_net(self, rn, scalar_modifier: int = 1):
+            print("check a-update")
+            print("dev kon:",self.kon.get_device())
+            print("dev rxn:",self.rxn_score_vec.get_device())
 
+
+            for n in rn.network.nodes:
+                rn.network.nodes[n]['copies'] = self.copies_vec[n].item()
+                for r_set in rn.get_reactant_sets(n):
+                    r_tup = tuple(r_set)
+                    reaction_id = rn.network.get_edge_data(r_tup[0], n)['uid']
+                    for r in r_tup:
+                        print("k_on: ",self.kon)
+                        print("rn score: ",self.rxn_score_vec)
+                        k = self.compute_log_constants(self.kon, self.rxn_score_vec, scalar_modifier)
+                        k = torch.exp(k)
+                        # print("RATEs: ",k)
+                        rn.network.edges[(r, n)]['k_on'] = k[reaction_id].item()
+                        rn.network.edges[(r, n)]['k_off'] = k[reaction_id + int(k.shape[0] / 2)].item()
+            return rn
 
 
 
@@ -364,24 +384,7 @@ class VectorizedRxnNet:
         # print("Actual Prod: ",torch.exp(l_c_prod_vec))
         return l_c_prod_vec
 
-    def update_reaction_net(self, rn, scalar_modifier: int = 1):
-        print("check a-update")
-        print("check device:",self.kon.get_device())
-
-        for n in rn.network.nodes:
-            rn.network.nodes[n]['copies'] = self.copies_vec[n].item()
-            for r_set in rn.get_reactant_sets(n):
-                r_tup = tuple(r_set)
-                reaction_id = rn.network.get_edge_data(r_tup[0], n)['uid']
-                for r in r_tup:
-                    print("k_on: ",self.kon)
-                    print("rn score: ",self.rxn_score_vec)
-                    k = self.compute_log_constants(self.kon, self.rxn_score_vec, scalar_modifier)
-                    k = torch.exp(k)
-                    # print("RATEs: ",k)
-                    rn.network.edges[(r, n)]['k_on'] = k[reaction_id].item()
-                    rn.network.edges[(r, n)]['k_off'] = k[reaction_id + int(k.shape[0] / 2)].item()
-        return rn
+    
 
     def get_max_edge(self,n):
         """
