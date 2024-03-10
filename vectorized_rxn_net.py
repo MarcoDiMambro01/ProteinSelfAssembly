@@ -80,6 +80,9 @@ class VectorizedRxnNet:
             self.optimize_species=rn.optimize_species
 
         self.M, self.kon, self.rxn_score_vec, self.copies_vec = self.generate_vectorized_representation(rn)
+        print("check generate:")
+        print("dev kon:",self.kon.get_device())
+        print("dev rxn:",self.rxn_score_vec.get_device())
         self.rxn_coupling = coupling
         self.coupling = rn.rxn_coupling
         self.num_monomers = rn.num_monomers
