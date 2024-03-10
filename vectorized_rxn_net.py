@@ -198,7 +198,8 @@ class VectorizedRxnNet:
 
         if self.homo_rates and self.assoc_is_param:
             self.params_kon = nn.Parameter(self.params_kon.data.clone().detach().to(dev), requires_grad=True)
-            
+            self.kon = self.kon.to(dev)
+
             #mine
             #self.kon = nn.Parameter(self.kon.data.clone().detach().to(dev)
         else:
@@ -227,8 +228,7 @@ class VectorizedRxnNet:
         num_states = len(rn.network.nodes)
         # initialize tensor representation dimensions
         M = torch.zeros((num_states, rn._rxn_count * 2)).double()
-        #kon = torch.zeros([rn._rxn_count], requires_grad=True).double()
-        kon = torch.zeros([rn._rxn_count]).double()
+        kon = torch.zeros([rn._rxn_count], requires_grad=True).double()
         rxn_score_vec = torch.zeros([rn._rxn_count]).double()
         copies_vec = torch.zeros([num_states]).double()
 
