@@ -506,10 +506,10 @@ class Optimizer:
                             print("K_on: ",self.rn.kon)
                             print("c0: ",self.rn._C0)
 
-                            with torch.no_grad:
-                                k_off=(torch.exp(self.rn.rxn_score_vec))*self.rn.kon*10e6 #self.rn._C0
-                                print("K_off: ",k_off)
-                                
+                            #with torch.no_grad:
+                            k_off=(torch.exp(self.rn.rxn_score_vec))*self.rn.kon*10e6 #self.rn._C0
+                            print("K_off: ",k_off)
+
                             k=torch.cat([self.rn.kon, k_off], dim=0).to(self.dev)
 
                             #print("log_k: ",log_k)
