@@ -496,12 +496,12 @@ class Optimizer:
                             cost.backward(retain_graph=True)
                         else:
                             print("check 11")
-                            #l_k=self.rn.compute_log_constants(self.rn.kon, self.rn.rxn_score_vec, scalar_modifier=1.)
+                            log_k=self.rn.compute_log_constants(self.rn.kon, self.rn.rxn_score_vec, scalar_modifier=1.)
 
-                            l_kon = torch.log(self.rn.kon)       
-                            l_koff = (self.rn.rxn_score_vec) + l_kon + torch.log(self.rn._C0).to(self.dev)
-                            l_k = torch.cat([l_kon, l_koff], dim=0)
-                            log_k=l_k.clone().to(self.dev)
+                            # l_kon = torch.log(self.rn.kon)       
+                            # l_koff = (self.rn.rxn_score_vec) + l_kon + torch.log(self.rn._C0).to(self.dev)
+                            # l_k = torch.cat([l_kon, l_koff], dim=0)
+                            # log_k=l_k.clone().to(self.dev)
 
                             k = torch.exp(log_k)
                             curr_lr = self.optimizer.state_dict()['param_groups'][0]['lr']
