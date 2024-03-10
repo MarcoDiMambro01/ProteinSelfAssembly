@@ -242,21 +242,23 @@ class Optimizer:
             calc_flux_optim = True
         for i in range(self.optim_iterations):
             # Reset for new simulator
-            print("check 0")
-            print(f"kon:{self.rn.kon}")
+            print("STEP ",i)
+            print("\n")
+            #print("check 0")
+            #print(f"kon:{self.rn.kon}")
             self.rn.reset()
 
             if self.rn.boolCreation_rxn and change_runtime:
                 pass
             else:
-                print("check 1")
-                print(f"kon: {self.rn.kon}")
+                #print("check 1")
+                #print(f"kon: {self.rn.kon}")
                 sim = self.sim_class(self.rn,
                                      self.sim_runtime,
                                      device=self.dev,
                                      calc_flux=calc_flux_optim)
-                print("check 2")
-                print(f"kon: {self.rn.kon}")
+                #print("check 2")
+                #print(f"kon: {self.rn.kon}")
 
 
             # Perform simulation
@@ -266,7 +268,7 @@ class Optimizer:
             elif self.rn.chaperone:
                 pass
             else:
-                print("check 3")
+                #print("check 3")
                 total_yield, total_flux = sim.simulate(optim,
                                                         node_str,
                                                         corr_rxns=corr_rxns,
@@ -277,21 +279,21 @@ class Optimizer:
                                                         verbose=True,
                                                         yield_species=yield_species
                                                     )
-                print(f"kon:{self.rn.kon}")
-                print("check 4")
+                #print(f"kon:{self.rn.kon}")
+                #print("check 4")
             
-            print("check 5")
+            #print("check 5")
 
             self.yield_per_iter.append(total_yield.item())
             # update tracked data
-            print("check 6")
+            #print("check 6")
             self.sim_observables.append(self.rn.observables.copy())
-            print("check 7")
+            #print("check 7")
             self.sim_observables[-1]['steps'] = np.array(sim.steps)
-            print("check 8")
+            #print("check 8")
             self.parameter_history.append(self.rn.kon.clone().detach().to(torch.device("cpu")).numpy())
             #self.parameter_history.append(self.rn.kon.clone().detach().numpy())
-            print("check 9")
+            #print("check 9")
 
             if optim in ['yield', 'time']:
                 if optim == 'yield':
@@ -334,6 +336,8 @@ class Optimizer:
                     if self.rn.assoc_is_param:
                         if self.rn.homo_rates:
                             print("check a11")
+                            print("kon: ",self.rn.params_kon)
+
                             l_k=self.rn.compute_log_constants(self.rn.params_kon, self.rn.params_rxn_score_vec,scalar_modifier=1.)
                             k = torch.exp(l_k)
                             curr_lr = self.optimizer.state_dict()['param_groups'][0]['lr']
