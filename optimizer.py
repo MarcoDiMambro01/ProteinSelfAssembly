@@ -242,8 +242,8 @@ class Optimizer:
             calc_flux_optim = True
         for i in range(self.optim_iterations):
             # Reset for new simulator
-            print("STEP ",i)
             print("\n")
+            print("STEP ",i)
             #print("check 0")
             #print(f"kon:{self.rn.kon}")
             self.rn.reset()
@@ -337,9 +337,14 @@ class Optimizer:
                         if self.rn.homo_rates:
                             print("check a11")
                             print("kon: ",self.rn.params_kon)
+                            #l_k=self.rn.compute_log_constants(self.rn.params_kon, self.rn.params_rxn_score_vec,scalar_modifier=1.)
+                            #k = torch.exp(l_k)
 
-                            l_k=self.rn.compute_log_constants(self.rn.params_kon, self.rn.params_rxn_score_vec,scalar_modifier=1.)
-                            k = torch.exp(l_k)
+                            k_off=(torch.exp(self.rn.params_rxn_score_vecself.rn.rxn_score_vec))*self.rn.params_kon*1e6 #self.rn._C0
+                            print("K_off: ",k_off)
+                            k=torch.cat([self.rn.params_kon, k_off], dim=0).to(self.dev)
+
+
                             curr_lr = self.optimizer.state_dict()['param_groups'][0]['lr']
                             physics_penalty = torch.sum(10 * F.relu(-1 * (k - curr_lr * 10))).to(self.dev) + torch.sum(10 * F.relu(1 * (k - max_thresh))).to(self.dev) # stops zeroing or negating params
                             cost = -total_yield + physics_penalty
