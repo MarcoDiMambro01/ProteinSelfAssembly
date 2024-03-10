@@ -302,11 +302,14 @@ class VectorizedRxnNet:
         # std_c = Tensor([1e6])  # units umols / L
         print("compute log")
         print("k_on: ",kon)
-        print("check device:",kon.get_device())
+        print("check kon device:",kon.get_device())
         print("rn score: ",dGrxn)
+        print("check rn device:",dGrxn.get_device())
+
 
         l_kon = torch.log(kon)  # umol-1 s-1
-        l_kon = l_kon.to(self.dev)
+        print("l_kon: ",l_kon)
+        print("check l_kon device:",l_kon.get_device())
         # l_koff = (dGrxn * scalar_modifier / (self._R * self._T)) + l_kon + torch.log(std_c)       #Units of dG in J/mol
         #l_koff = (dGrxn * scalar_modifier) + l_kon + torch.log(self._C0).to(self.dev)
         l_koff = (dGrxn) + l_kon + torch.log(self._C0).to(self.dev)
