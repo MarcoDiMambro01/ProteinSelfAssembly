@@ -83,7 +83,7 @@ class VectorizedRxnNet:
             self.chap_uid_map = rn.chap_uid_map
             self.optimize_species=rn.optimize_species
 
-        self.M, self.kon, self.rxn_score_vec, self.copies_vec = self.generate_vectorized_representation(rn)
+        self.M, self.kon, self.rxn_score_vec, self.copies_vec = self.generate_vectorized_representation(rn).to(self.dev)
         self.rxn_coupling = coupling
         self.coupling = rn.rxn_coupling
         self.num_monomers = rn.num_monomers
