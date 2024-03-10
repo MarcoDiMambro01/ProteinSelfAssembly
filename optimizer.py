@@ -534,7 +534,7 @@ class Optimizer:
 
                             cost.backward()
                             print("Grad: ",self.rn.kon.grad)
-                            print("Test inf:",torch.isfinite(self.rn.kon.grad))
+                            print("Finite:",torch.isfinite(self.rn.kon.grad))
                             print("K:", k)
                             print("curr_lr",curr_lr)
 
