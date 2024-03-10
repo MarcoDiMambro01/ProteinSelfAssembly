@@ -81,9 +81,9 @@ def execute(yield_time=0.0, **args):
     # nx.set_edge_attributes(rn.network,update_kon_dict,'k_on')
 
 
-    # #Creating the vectorized network
-    # vec_rn = VectorizedRxnNet(rn, dev=device)
-    # vec_rn.reset(reset_params=True)
+    #Creating the vectorized network
+    vec_rn = VectorizedRxnNet(rn, dev=device)
+    vec_rn.reset(reset_params=True)
 
     
     rn.reset()
