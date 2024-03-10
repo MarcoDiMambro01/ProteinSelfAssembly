@@ -494,6 +494,7 @@ class Optimizer:
                             cost = -total_yield + physics_penalty
                             cost.backward(retain_graph=True)
                         else:
+                            print("check 11")
                             k = torch.exp(self.rn.compute_log_constants(self.rn.kon, self.rn.rxn_score_vec,
                                                             scalar_modifier=1.))
                             curr_lr = self.optimizer.state_dict()['param_groups'][0]['lr']
@@ -510,8 +511,13 @@ class Optimizer:
 
                             # dimer_penalty = 10*F.relu(1*(k[16] - self.lr*20))+10*F.relu(1*(k[17] - self.lr*20))+10*F.relu(1*(k[18] - self.lr*20))
                             cost = -total_yield + physics_penalty + var_penalty #+ dimer_penalty#+ var_penalty #+ ratio_penalty
+                            print("cost:",cost)
+
                             cost.backward()
-                            # print("Grad: ",self.rn.kon.grad)
+                            print("Grad: ",self.rn.kon.grad)
+                            print("K:", k)
+                            print("curr_lr",curr_lr)
+
                     elif self.rn.copies_is_param:
                         c = self.rn.c_params.clone().detach()
                         physics_penalty = torch.sum(10 * F.relu(-1 * (c))).to(self.dev)# stops zeroing or negating params
