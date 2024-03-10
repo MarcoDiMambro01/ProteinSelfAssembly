@@ -348,7 +348,7 @@ class Optimizer:
 
                             curr_lr = self.optimizer.state_dict()['param_groups'][0]['lr']
                             #physics_penalty = torch.sum(F.relu(-1 * (k - curr_lr * 10))).to(self.dev) + torch.sum(F.relu(1 * (k - 10))).to(self.dev) # stops zeroing or negating params
-                            physics_penalty = F.relu(-1 * (k - curr_lr * 10)).to(self.dev)# + nn.ReLU(1 * (k - 10)).to(self.dev) # stops zeroing or negating params
+                            physics_penalty = 0
                             cost = -total_yield + physics_penalty
 
                             print("cost: ",cost)
