@@ -378,6 +378,7 @@ class VectorizedRxnNet:
 
         print("Shifting to device: ", dev)
         self.to(dev)
+        print("check k on device:",self.kon.get_device())
 
     def reset(self, reset_params=False):
         self.copies_vec = self.initial_copies.clone()
