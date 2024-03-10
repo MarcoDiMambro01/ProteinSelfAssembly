@@ -503,6 +503,7 @@ class Optimizer:
                             # log_k=l_k.clone().to(self.dev)
 
                             k_off=torch.exp(self.rn.rxn_score_vec)*self.rn.kon*self.rn._C0
+                            print("K_off: ",k_off)
                             k=torch.cat([self.rn.kon, k_off], dim=0).to(self.dev)
 
                             #print("log_k: ",log_k)
