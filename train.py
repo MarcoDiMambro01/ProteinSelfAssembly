@@ -90,9 +90,9 @@ def execute(yield_time=0.0, **args):
     rn.intialize_activations()
     #Optimizer
     optim = Optimizer(reaction_network=rn,
-                    sim_runtime=args.get("runtime"),
-                    optim_iterations=args.get("iter"),
-                    learning_rate=args.get("lr"),
+                    sim_runtime=args["runtime"],
+                    optim_iterations=args["iter"],
+                    learning_rate=args["lr"],
                     device=device,method="Adam")
 
     #get the index of the final yield    

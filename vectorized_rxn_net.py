@@ -594,14 +594,14 @@ class VectorizedRxnNet:
         """
         # above conversions cancel
         # std_c = Tensor([1e6])  # units umols / L
-        
-        with torch.no_grad():
-            l_kon = torch.log(kon)  # umol-1 s-1
-            # l_koff = (dGrxn * scalar_modifier / (self._R * self._T)) + l_kon + torch.log(std_c)       #Units of dG in J/mol
-            l_koff = (dGrxn * scalar_modifier) + l_kon + torch.log(self._C0).to(self.dev)
-            # print(torch.exp(l_kon))
-            # print(torch.exp(l_koff))       #Units of dG in J/mol
-            l_k = torch.cat([l_kon, l_koff], dim=0)
+
+        #with torch.no_grad():
+        l_kon = torch.log(kon)  # umol-1 s-1
+        # l_koff = (dGrxn * scalar_modifier / (self._R * self._T)) + l_kon + torch.log(std_c)       #Units of dG in J/mol
+        l_koff = (dGrxn * scalar_modifier) + l_kon + torch.log(self._C0).to(self.dev)
+        # print(torch.exp(l_kon))
+        # print(torch.exp(l_koff))       #Units of dG in J/mol
+        l_k = torch.cat([l_kon, l_koff], dim=0)
 
 
         if self.boolCreation_rxn or self.boolDestruction_rxn:

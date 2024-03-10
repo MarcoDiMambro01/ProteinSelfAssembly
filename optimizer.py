@@ -618,7 +618,7 @@ class Optimizer:
                         for param_groups in self.optimizer.param_groups:
                             print(param_groups['lr'])
 
-                    #self.optimizer.step()
+                    self.optimizer.step()
 
                     #print("Previous reaction rates: ",str(self.rn.kon.clone().detach()))
 
